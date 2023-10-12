@@ -2,7 +2,7 @@ library(tidyverse) #loading the tidyverse package
 
 #The next line reads in the gapminder_1997.csv file
 gapminder_1997 <- read_csv(file = "data/gapminder_1997.csv")
-read_csv()
+
 Sys.Date() #prints the date and time
 getwd() #prints the current working directory
 sum(5,6)
@@ -45,4 +45,4 @@ ggplot(data=gapminder_1997) +
   geom_point() +
   scale_color_brewer(palette = "Set2")
 
-
+ggsave("figures/gdpPercap_lifeExp.png")
