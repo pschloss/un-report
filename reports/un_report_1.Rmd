@@ -2,21 +2,29 @@
 title: "A UN Report on the Relationship between GDP and Life Expectancy"
 author: "Patrick D. Schloss"
 date: "2023-10-13"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
 ---
 
 ```{r setup, include = FALSE}
 library(tidyverse)
 library(here)
+library(knitr)
 
 options(scipen = 1000000)
 ```
+
+## Abstract
 
 This report was prepared to the attention of the UN. It analyzes the relationship between a country's GDP, its life expectancy, and CO2 emissions. Our goal is to determine to what degree a country's economic strength or weakness is related to its public health status and impact on climate pollution. We hypothesize that both life expectancy and CO2 emissions increase with the country's GDP.
 
 ```{r data, include = FALSE}
 gapminder_1997 <- read_csv(here("data/gapminder_1997.csv"))
 ```
+
+## Plotting GDP by Life Expectancy
 
 ```{r gdp_lifeexp_1997, echo = FALSE}
 ggplot(data = gapminder_1997, 
@@ -45,5 +53,48 @@ maximum_gdp <- gapminder_1997 %>%
 # format - will format things nicely
 ```
 
-The above plot shows the relationship between GDP per capita and life expectancy for a total of `r n_countries` countries. For this set of countries, economic wealth ranged from a minimum of \$`r minimum_gdp` to a maximum of \$`r maximum_gdp` per capita.
+## Summary statistics
 
+The above plot shows the relationship between GDP per capita and life expectancy for a total of `r n_countries` countries. For this set of countries, economic wealth ranged from a minimum of \$`r minimum_gdp` to a maximum of \$`r maximum_gdp` per capita. $n=2+2$
+
+
+| Summary of data  |
+|:----------|-----------:|
+|Number of countries | `r n_countries` |
+|Minimum GDP per capita | `r minimum_gdp` |
+|Maximum GDP per capita | `r maximum_gdp` |
+
+
+```{r table, echo = FALSE}
+gapminder_1997 %>%
+  filter(continent == "Oceania") %>%
+  kable()
+```
+
+## Exercises
+
+#### Exercise 1:
+Try googling how to create sections by using headers and sub-headers using Markdown. What do you find?
+
+### Exercise 2:
+Go ahead and do some online searches on how to do the following:
+
+* Create a bullet point list with three items
+* As the first item, write the name of your currently favorite programming language in bold
+* As the second item, write the name of a function you have so far found most useful in italics
+* As the third item, write one thing you want to learn next on your programming journey in bold and italics
+* Turn your bullet point list into a numbered list
+* Create a fourth list item and find an online guide and/or cheat sheet for basic Markdown syntax, write its name down here and hyperlink its URL
+
+My bulleted list
+
+* My favorite programming language is **R**
+* The most useful function has been *group_by*
+* The next thing I want to learn is ***RNAseq analysis***
+
+My numbered list
+
+1. My favorite programming language is **R**
+1. The next thing I want to learn is ***RNAseq analysis***
+1. The most useful function has been *group_by*
+1. This is my [favorite markdown cheatsheet](https://rstudio.github.io/cheatsheets/html/rmarkdown.html?_gl=1*l8arwq*_ga*ODA0MTA1NDY2LjE2OTcyMjQwNTk.*_ga_2C0WZ1JHG0*MTY5NzIyNDA1OS4xLjAuMTY5NzIyNDA1OS4wLjAuMA..)
